@@ -76,6 +76,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 ## 📝 Code Quality
 
 This project includes:
+
 - ESLint for code linting
 - Prettier for code formatting
 - Husky for git hooks

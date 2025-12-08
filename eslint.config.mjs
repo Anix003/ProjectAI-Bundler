@@ -1,6 +1,6 @@
 import { defineConfig, globalIgnores } from 'eslint/config'
 import nextVitals from 'eslint-config-next/core-web-vitals'
-import prettier from 'eslint-config-prettier'
+import prettierRecommended from 'eslint-plugin-prettier/recommended'
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -13,12 +13,13 @@ const eslintConfig = defineConfig([
     'next-env.d.ts',
   ]),
 
-  prettier,
+  prettierRecommended,
 
   {
     rules: {
       'no-console': 'warn', // Warn on console.log
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Allow unused args starting with _
+      'prettier/prettier': 'warn',
     },
   },
 ])
