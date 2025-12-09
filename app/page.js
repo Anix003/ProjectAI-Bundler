@@ -17,23 +17,26 @@ export default function Home() {
     try {
       console.log('Submitting to /api/classify:', {
         message: data.message,
-        attachments: data.attachments,
+        // attachments: data.attachments,
       })
 
       // Call the classify API route
-      const apiResponse = await fetch('/api/classify', {
+      const res = await fetch('/api/classify', {
         method: 'POST',
-        body: data.formData, // FormData with message and attachments
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: data.message }),
       })
 
-      if (!apiResponse.ok) {
-        const errorData = await apiResponse.json()
-        throw new Error(errorData.message || `API error: ${apiResponse.status}`)
+      const apiResponse = await res.json()
+
+      if (!res.ok) {
+        throw new Error(apiResponse.error || `API error: ${res.status}`)
       }
 
-      const result = await apiResponse.json()
-      console.log('API Response:', result)
-      setResponse(result)
+      console.log('API Response:', apiResponse)
+      setResponse(apiResponse)
     } catch (err) {
       console.error('Submission error:', err)
       setError(err.message || 'Failed to submit. Please try again.')
